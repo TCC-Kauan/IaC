@@ -22,3 +22,13 @@ variable "subnets" {
   type        = set(string)
   description = ""
 }
+
+variable "port" {
+  type        = number
+  description = ""
+}
+
+variable "protocol" {
+  type        = string
+  description = ""
+}
