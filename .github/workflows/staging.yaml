@@ -1,3 +1,18 @@
+# .github/workflows/staging.yaml
+name: 'Terraform - Staging'
+
+on:
+  push:
+    branches:
+    - main
+    paths: 
+    - staging/**
+  pull_request:
+    branches:
+    - main
+    paths: 
+    - staging/**
+    
 defaults:
   run:
     working-directory: ${{ env.tf_actions_working_dir }}
