@@ -3,7 +3,8 @@ resource "aws_sqs_queue" "this" {
 }
 
 resource "aws_security_group" "this" {
-  name = "${var.lambda_function_name}_security_group"
+  name   = "${var.lambda_function_name}_security_group"
+  vpc_id = var.vpc_id
 
   ingress {
     from_port = 0
@@ -22,8 +23,7 @@ resource "aws_security_group" "this" {
 data "aws_iam_policy_document" "this" {
   statement {
     actions = [
-      "sts:AssumeRole",
-      "sqs:SendMessage"
+      "sts:AssumeRole"
     ]
 
     principals {
@@ -31,13 +31,42 @@ data "aws_iam_policy_document" "this" {
       identifiers = ["lambda.amazonaws.com"]
     }
 
-    resources = [aws_sqs_queue.this.arn]
   }
 }
 
 resource "aws_iam_role" "this" {
   name               = var.lambda_function_name
   assume_role_policy = data.aws_iam_policy_document.this.json
+}
+
+resource "aws_iam_role_policy_attachment" "this" {
+  role       = aws_iam_role.this.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+}
+
+resource "aws_iam_role_policy_attachment" "this_vpc" {
+    role       = aws_iam_role.this.name
+    policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+}
+
+data "aws_iam_policy_document" "this_sqs" {
+  statement {
+    actions = [
+      "sqs:SendMessage"
+    ]
+    resources = [aws_sqs_queue.this.arn]
+  }
+}
+
+resource "aws_iam_policy" "this" {
+  name        = "sqs${var.lambda_function_name}"
+  description = "Write on SQS"
+  policy      = data.aws_iam_policy_document.this_sqs.json
+}
+
+resource "aws_iam_role_policy_attachment" "this_sqs" {
+  role       = aws_iam_role.this.name
+  policy_arn = aws_iam_policy.this.arn
 }
 
 resource "aws_lambda_function" "this" {
@@ -65,4 +94,5 @@ resource "aws_lambda_function" "this" {
   }
 
   tags = var.tags
+
 }
