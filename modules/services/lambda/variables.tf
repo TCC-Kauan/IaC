@@ -47,3 +47,8 @@ variable "tags" {
   type        = map(string)
   description = "Map of tags to assign to the object."
 }
+
+variable "vpc_id" {
+  type        = string
+  description = "VPC ID"
+}
