@@ -33,7 +33,7 @@ variable "vpc_id" {
   description = "VPC ID"
 }
 
-variable "cidr_blocks" {
+variable "allowed_cidr_blocks" {
   type        = list(string)
   description = "List of CIDR blocks"
 }

@@ -48,9 +48,18 @@ resource "aws_security_group" "this" {
   }
 }
 
+resource "aws_ecs_cluster" "this" {
+  name = var.cluster_name
+
+  setting {
+    name  = "containerInsights"
+    value = "enabled"
+  }
+}
+
 resource "aws_ecs_service" "this" {
   name                              = var.service_name
-  cluster                           = var.cluster_name
+  cluster                           = aws_ecs_cluster.this.name
   task_definition                   = aws_ecs_task_definition.this.arn
   desired_count                     = var.service_desired_count
   launch_type                       = var.service_launch_type
