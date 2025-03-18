@@ -6,6 +6,7 @@ resource "aws_security_group" "this" {
     from_port   = 8080
     to_port     = 8080
     protocol    = "tcp"
+#Bloco VPC
     cidr_blocks = var.allowed_cidr_blocks
   }
   egress {
