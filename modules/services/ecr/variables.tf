@@ -12,8 +12,3 @@ variable "scan_on_push" {
   type        = bool
   description = "Indicates whether images are scanned after being pushed to the repository (true) or not scanned (false)"
 }
-
-variable "tags" {
-  type        = map(string)
-  description = "A map of tags to assign to the resource"
-}

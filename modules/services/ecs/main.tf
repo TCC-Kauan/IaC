@@ -35,10 +35,10 @@ resource "aws_security_group" "this" {
   vpc_id = var.security_group_vpc_id
 
   ingress {
-    from_port = 0
-    to_port   = 0
-    protocol  = "-1"
-    self      = true
+    from_port   = 0
+    to_port     = 0
+    protocol    = "tcp"
+    cidr_blocks = var.allowed_cidr_blocks
   }
   egress {
     from_port   = 0
@@ -76,7 +76,6 @@ resource "aws_ecs_service" "this" {
     container_port   = var.load_balancer_container_port
   }
 
-  tags = var.tags
 }
 
 resource "aws_cloudwatch_log_group" "this" {

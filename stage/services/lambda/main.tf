@@ -16,9 +16,7 @@ module "lambda_stage_1" {
     "arn:aws:lambda:us-east-1:017000801446:layer:AWSLambdaPowertoolsPythonV2:29"
   ]
 
-  vpc_id = "vpc-06a8d4228443ca62c"
-  tags = {
-    Name = "App stage 1"
-    Team = "Devs"
-  }
+  vpc_id              = "vpc-06a8d4228443ca62c"
+  allowed_cidr_blocks = ""
+
 }

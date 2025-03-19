@@ -1,39 +1,86 @@
-variable "name" {
+variable "alb_name" {
+  description = "Name of the ALB"
   type        = string
-  description = "Name of the LB."
 }
 
 variable "internal" {
+  description = "Whether the ALB is internal"
   type        = bool
-  description = "If true, the LB will be internal."
+  default     = false
 }
 
-variable "load_balancer_type" {
+variable "subnet_ids" {
+  description = "List of subnet IDs for the ALB"
+  type        = list(string)
+}
+
+variable "target_group_name" {
+  description = "Name of the Target Group"
   type        = string
-  description = "Type of load balancer to create. Possible values are application, gateway, or network."
+  default     = "my-target-group"
 }
 
-variable "security_groups" {
-  type        = set(string)
-  description = " List of security group IDs to assign to the LB. Only valid for Load Balancers of type application or network."
+variable "target_group_port" {
+  description = "Port of the Target Group"
+  type        = number
+  default     = 80
 }
 
-variable "subnets" {
-  type        = set(string)
-  description = " List of subnet IDs to attach to the LB."
-}
-
-variable "tags" {
-  type        = map(string)
-  description = "Map of tags to assign to the resource."
+variable "target_group_protocol" {
+  description = "Protocol of the Target Group"
+  type        = string
+  default     = "HTTP"
 }
 
 variable "vpc_id" {
-  type        = string
   description = "VPC ID"
+  type        = string
 }
 
+variable "listener_port" {
+  description = "Port of the ALB listener"
+  type        = number
+  default     = 80
+}
+
+variable "listener_protocol" {
+  description = "Protocol of the ALB listener"
+  type        = string
+  default     = "HTTP"
+}
+
+variable "health_check_path" {
+  description = "Health check path"
+  type        = string
+  default     = "/"
+}
+
+variable "health_check_port" {
+  description = "Health check port"
+  type        = string
+  default     = "traffic-port"
+}
+
+variable "health_check_protocol" {
+  description = "Health check protocol"
+  type        = string
+  default     = "HTTP"
+}
+
+variable "environment" {
+  description = "Enviroment tag"
+  type        = string
+  default     = "dev"
+}
+
+variable "enable_deletion_protection" {
+  description = "enable deletion protection"
+  type        = bool
+  default     = false
+}
+
+
 variable "allowed_cidr_blocks" {
+  description = "List of CIDR blocks allowed to access the load balancer"
   type        = list(string)
-  description = "List of CIDR blocks"
 }

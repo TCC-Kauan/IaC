@@ -43,12 +43,12 @@ variable "lambda_function_variables" {
   description = "Map of environment variables that are accessible from the function code during execution."
 }
 
-variable "tags" {
-  type        = map(string)
-  description = "Map of tags to assign to the object."
-}
-
 variable "vpc_id" {
   type        = string
   description = "VPC ID"
+}
+
+variable "allowed_cidr_blocks" {
+  description = "List of CIDR blocks allowed to access the load balancer"
+  type        = list(string)
 }

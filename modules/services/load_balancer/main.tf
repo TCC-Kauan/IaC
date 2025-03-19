@@ -1,12 +1,12 @@
 resource "aws_security_group" "this" {
-  name   = "${var.name}_security_group"
+  name   = "${var.alb_name}_security_group"
   vpc_id = var.vpc_id
 
   ingress {
-    from_port   = 8080
-    to_port     = 8080
-    protocol    = "tcp"
-#Bloco VPC
+    from_port = 8080
+    to_port   = 8080
+    protocol  = "tcp"
+    #Bloco VPC
     cidr_blocks = var.allowed_cidr_blocks
   }
   egress {
@@ -15,15 +15,13 @@ resource "aws_security_group" "this" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
-  tags = var.tags
 }
 
 resource "aws_lb" "application_load_balancer" {
   name               = var.alb_name
   internal           = var.internal
   load_balancer_type = "application"
-  security_groups    = var.security_groups
+  security_groups    = [aws_security_group.this.id]
   subnets            = var.subnet_ids
 }
 

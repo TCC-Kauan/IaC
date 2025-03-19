@@ -7,10 +7,10 @@ resource "aws_security_group" "this" {
   vpc_id = var.vpc_id
 
   ingress {
-    from_port = 0
-    to_port   = 0
-    protocol  = "-1"
-    self      = true
+    from_port   = 0
+    to_port     = 0
+    protocol    = "tcp"
+    cidr_blocks = var.allowed_cidr_blocks
   }
   egress {
     from_port   = 0
@@ -92,7 +92,4 @@ resource "aws_lambda_function" "this" {
   dead_letter_config {
     target_arn = aws_sqs_queue.this.arn
   }
-
-  tags = var.tags
-
 }

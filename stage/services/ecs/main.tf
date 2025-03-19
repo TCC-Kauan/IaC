@@ -20,6 +20,5 @@ module "ecs_stage_1" {
 
   network_configuration_subnets = ""
   security_group_vpc_id         = ""
-
-  tags = ""
+  allowed_cidr_blocks           = ""
 }

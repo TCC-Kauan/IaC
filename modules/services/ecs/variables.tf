@@ -78,7 +78,7 @@ variable "load_balancer_container_port" {
   description = "Port on the container to associate with the load balancer."
 }
 
-variable "tags" {
-  type        = map(string)
-  description = "Map of tags to assign to the object."
+variable "allowed_cidr_blocks" {
+  description = "List of CIDR blocks allowed to access the load balancer"
+  type        = list(string)
 }
