@@ -6,7 +6,7 @@ module "ecs_stage_1" {
   task_definition_cpu                      = 0
   task_definition_container_definitions    = ""
   task_definition_memory                   = 0
-  task_definition_requires_compatibilities = ""
+  task_definition_requires_compatibilities = [""]
 
   cluster_name                              = ""
   service_name                              = ""
@@ -18,7 +18,7 @@ module "ecs_stage_1" {
   load_balancer_target_group_arn = ""
   load_balancer_container_port   = 0
 
-  network_configuration_subnets = ""
+  network_configuration_subnets = [""]
   security_group_vpc_id         = ""
-  allowed_cidr_blocks           = ""
+  allowed_cidr_blocks           = [""]
 }

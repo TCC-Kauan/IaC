@@ -16,7 +16,7 @@ module "lambda_stage_1" {
     "arn:aws:lambda:us-east-1:017000801446:layer:AWSLambdaPowertoolsPythonV2:29"
   ]
 
-  vpc_id              = "vpc-06a8d4228443ca62c"
-  allowed_cidr_blocks = ""
+  vpc_id              = ""
+  allowed_cidr_blocks = [""]
 
 }
