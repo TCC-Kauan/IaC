@@ -1,3 +1,12 @@
+/**
+
+**/
+
+variable "vpc_id" {}
+variable "subnet_ids" {}
+variable "allowed_cidr_blocks" {}
+variable "target_group_arn" {}
+
 module "ecs_stage_1" {
   source = "../../../modules/services/ecs"
 
@@ -14,11 +23,11 @@ module "ecs_stage_1" {
   service_launch_type                       = ""
   service_health_check_grace_period_seconds = 0
 
-  load_balancer_container_name   = ""
-  load_balancer_target_group_arn = ""
-  load_balancer_container_port   = 0
+  load_balancer_container_name   = "my-application"
+  load_balancer_target_group_arn = var.target_group_arn
+  load_balancer_container_port   = 80
 
-  network_configuration_subnets = [""]
-  security_group_vpc_id         = ""
-  allowed_cidr_blocks           = [""]
+  vpc_id              = var.vpc_id
+  subnet_ids          = var.subnet_ids
+  allowed_cidr_blocks = var.allowed_cidr_blocks
 }

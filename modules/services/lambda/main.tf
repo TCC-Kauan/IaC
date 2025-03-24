@@ -81,7 +81,7 @@ resource "aws_lambda_function" "this" {
   layers        = var.lambda_function_layers
 
   vpc_config {
-    subnet_ids         = var.lambda_function_subnets_ids
+    subnet_ids         = var.subnets_ids
     security_group_ids = [aws_security_group.this.id]
   }
 

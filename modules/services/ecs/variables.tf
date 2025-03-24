@@ -38,11 +38,6 @@ variable "task_definition_container_definitions" {
   description = "A list of valid container definitions provided as a single valid JSON document."
 }
 
-variable "security_group_vpc_id" {
-  type        = string
-  description = "VPC ID"
-}
-
 variable "service_desired_count" {
   type        = number
   description = "Number of instances of the task definition to place and keep running. Defaults to 0."
@@ -58,11 +53,6 @@ variable "service_health_check_grace_period_seconds" {
   description = "Seconds to ignore failing load balancer health checks on newly instantiated tasks to prevent premature shutdown."
 }
 
-variable "network_configuration_subnets" {
-  type        = set(string)
-  description = "Network configuration for the service."
-}
-
 variable "load_balancer_target_group_arn" {
   type        = string
   description = "ARN of the Load Balancer target group to associate with the service."
@@ -76,6 +66,16 @@ variable "load_balancer_container_name" {
 variable "load_balancer_container_port" {
   type        = number
   description = "Port on the container to associate with the load balancer."
+}
+
+variable "vpc_id" {
+  type        = string
+  description = "VPC ID"
+}
+
+variable "subnet_ids" {
+  type        = set(string)
+  description = "Network configuration for the service."
 }
 
 variable "allowed_cidr_blocks" {

@@ -7,3 +7,7 @@ module "vpc" {
   public_subnet_1_cidr  = "10.10.0.128/26"
   public_subnet_2_cidr  = "10.10.0.192/26"
 }
+
+output "networking" {
+  value = module.vpc
+}

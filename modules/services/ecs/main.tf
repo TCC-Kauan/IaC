@@ -32,7 +32,7 @@ resource "aws_ecs_task_definition" "this" {
 
 resource "aws_security_group" "this" {
   name   = "${var.task_definition_family}_security_group"
-  vpc_id = var.security_group_vpc_id
+  vpc_id = var.vpc_id
 
   ingress {
     from_port   = 0
@@ -66,7 +66,7 @@ resource "aws_ecs_service" "this" {
   health_check_grace_period_seconds = var.service_health_check_grace_period_seconds
 
   network_configuration {
-    subnets         = var.network_configuration_subnets
+    subnets         = var.subnet_ids
     security_groups = [aws_security_group.this.id]
   }
 

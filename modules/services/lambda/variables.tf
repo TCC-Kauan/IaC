@@ -33,11 +33,6 @@ variable "lambda_function_layers" {
   description = "List of Lambda Layer Version ARNs (maximum of 5) to attach to your Lambda Function."
 }
 
-variable "lambda_function_subnets_ids" {
-  type        = set(string)
-  description = "List of subnet IDs associated with the Lambda function."
-}
-
 variable "lambda_function_variables" {
   type        = map(string)
   description = "Map of environment variables that are accessible from the function code during execution."
@@ -46,6 +41,11 @@ variable "lambda_function_variables" {
 variable "vpc_id" {
   type        = string
   description = "VPC ID"
+}
+
+variable "subnets_ids" {
+  type        = set(string)
+  description = "List of subnet IDs associated with the Lambda function."
 }
 
 variable "allowed_cidr_blocks" {
