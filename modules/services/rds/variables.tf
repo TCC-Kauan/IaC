@@ -7,7 +7,7 @@ variable "allocated_storage" {
 variable "storage_type" {
   description = "Storage type for the RDS instance"
   type        = string
-  default     = "gp2"
+  default     = "gp3"
 }
 
 variable "engine" {
