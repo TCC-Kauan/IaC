@@ -59,7 +59,7 @@ data "aws_iam_policy_document" "this_sqs" {
 }
 
 resource "aws_iam_policy" "this" {
-  name        = "sqs${var.lambda_function_name}"
+  name        = "sqs-${var.lambda_function_name}"
   description = "Write on SQS"
   policy      = data.aws_iam_policy_document.this_sqs.json
 }
