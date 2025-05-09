@@ -71,25 +71,12 @@ resource "aws_iam_role_policy_attachment" "this_sqs" {
 
 
 resource "aws_lb_target_group" "this" {
-  name     = var.target_group_name
-  port     = var.target_group_port
-  protocol = var.target_group_protocol
-  vpc_id   = var.vpc_id
-
-  health_check {
-    enabled             = true
-    interval            = 30
-    path                = var.health_check_path
-    port                = var.health_check_port
-    protocol            = var.health_check_protocol
-    timeout             = 5
-    healthy_threshold   = 2
-    unhealthy_threshold = 2
-  }
+  name        = var.lambda_function_name
+  target_type = "lambda"
 }
 
 resource "aws_lb_listener" "this" {
-  load_balancer_arn = aws_lb.application_load_balancer.arn
+  load_balancer_arn = var.alb
   port              = var.listener_port
   protocol          = var.listener_protocol
 
@@ -105,19 +92,27 @@ resource "aws_lb_listener" "this" {
 }
 
 resource "aws_lb_listener_rule" "this" {
-  listener_arn = aws_lb_listener.http_listener.arn
-  priority     = 1
+  listener_arn = aws_lb_listener.this.arn
+  priority     = var.priority
 
   action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.target_group.arn
+    target_group_arn = aws_lb_target_group.this.arn
   }
 
   condition {
     path_pattern {
-      values = ["/my-application*"]
+      values = ["/${var.lambda_function_name}*"]
     }
   }
+}
+
+resource "aws_lambda_permission" "this" {
+  statement_id_prefix = "${var.lambda_function_name}-AllowExecutionFromlb"
+  action              = "lambda:InvokeFunction"
+  function_name       = aws_lambda_function.this.arn
+  principal           = "elasticloadbalancing.amazonaws.com"
+  source_arn          = aws_lb_target_group.this.arn
 }
 
 resource "aws_lambda_function" "this" {

@@ -94,7 +94,7 @@ resource "aws_lb_listener_rule" "this" {
 
   condition {
     path_pattern {
-      values = ["/my-application*"]
+      values = ["/${var.service_name}*"]
     }
   }
 }

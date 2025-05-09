@@ -1,8 +1,20 @@
+/**
+
+**/
+
+variable "vpc_id" {}
+variable "subnet_ids" {}
+variable "allowed_cidr_blocks" {}
+
 module "alb" {
   source = "../../../modules/services/load_balancer"
 
-  alb_name            = ""
-  subnet_ids          = ""
-  vpc_id              = ""
-  allowed_cidr_blocks = ""
+  alb_name            = "alb_prod"
+  vpc_id              = var.vpc_id
+  subnet_ids          = [var.subnet_ids]
+  allowed_cidr_blocks = [var.allowed_cidr_blocks]
+}
+
+output "instance" {
+  value = module.alb
 }

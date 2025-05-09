@@ -1,4 +1,4 @@
-module "app_stage_1" {
+module "app_1" {
   source = "../../../modules/services/ecr"
 
   name                 = "app_prod_1"

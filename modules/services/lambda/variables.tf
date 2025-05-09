@@ -52,3 +52,26 @@ variable "allowed_cidr_blocks" {
   description = "List of CIDR blocks allowed to access the load balancer"
   type        = list(string)
 }
+
+variable "alb" {
+  description = ""
+  type        = string
+}
+
+variable "priority" {
+  description = ""
+  type        = number
+  default     = 1
+}
+
+variable "listener_port" {
+  description = "Port of the ALB listener"
+  type        = number
+  default     = 80
+}
+
+variable "listener_protocol" {
+  description = "Protocol of the ALB listener"
+  type        = string
+  default     = "HTTP"
+}

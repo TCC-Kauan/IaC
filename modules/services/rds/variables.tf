@@ -13,7 +13,7 @@ variable "storage_type" {
 variable "engine" {
   description = "Database engine type"
   type        = string
-  default     = "postgresql"
+  default     = "postgres"
 }
 
 variable "engine_version" {

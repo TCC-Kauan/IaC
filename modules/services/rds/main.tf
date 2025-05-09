@@ -6,7 +6,7 @@ resource "random_password" "this" {
 }
 
 resource "aws_secretsmanager_secret" "this" {
-  name = "${var.db_name}_secret"
+  name = "${var.db_name}-secret"
 }
 
 resource "aws_secretsmanager_secret_version" "this" {

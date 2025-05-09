@@ -1,7 +1,11 @@
-module "app_stage_1" {
+/**
+
+**/
+
+module "app" {
   source = "../../../modules/services/ecr"
 
-  name                 = "app_stage_1"
+  name                 = "my-app"
   image_tag_mutability = "MUTABLE"
   scan_on_push         = true
 }

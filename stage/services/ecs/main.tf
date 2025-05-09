@@ -7,7 +7,7 @@ variable "subnet_ids" {}
 variable "allowed_cidr_blocks" {}
 variable "target_group_arn" {}
 
-module "ecs_stage_1" {
+module "ecs" {
   source = "../../../modules/services/ecs"
 
   task_definition_family                   = ""
