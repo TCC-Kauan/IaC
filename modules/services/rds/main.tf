@@ -49,6 +49,7 @@ resource "aws_security_group" "rds_sg" {
 }
 
 resource "aws_db_instance" "rds" {
+  identifier             = var.db_name
   allocated_storage      = var.allocated_storage
   storage_type           = var.storage_type
   engine                 = var.engine

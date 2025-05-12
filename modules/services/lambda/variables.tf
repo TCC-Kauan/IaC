@@ -67,7 +67,7 @@ variable "priority" {
 variable "listener_port" {
   description = "Port of the ALB listener"
   type        = number
-  default     = 80
+  default     = 8080
 }
 
 variable "listener_protocol" {
