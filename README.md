@@ -5,4 +5,4 @@
 
 ## Infraestrutura
 
-<img src="./infraestructure.png">
+<img src="./Infraestructure.png">
