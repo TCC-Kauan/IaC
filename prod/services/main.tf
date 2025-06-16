@@ -13,10 +13,6 @@ module "ecr" {
   source = "./ecr"
 }
 
-# module "ecs" {
-#   source = "./ecs"
-# }
-
 module "lambda" {
   source              = "./lambda"
   vpc_id              = module.vpc.networking.vpc_id
