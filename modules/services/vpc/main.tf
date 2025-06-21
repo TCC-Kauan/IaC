@@ -76,7 +76,7 @@ resource "aws_route_table_association" "public_2" {
   route_table_id = aws_route_table.public.id
 }
 
-# NAT Gateway e Elastic IP para sub-redes privadas
+# NAT Gateway e Elastic IP para sub-nets privadas
 resource "aws_eip" "this" {
   domain = "vpc"
 }
